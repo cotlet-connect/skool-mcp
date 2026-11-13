@@ -38,14 +38,14 @@ Skool has no public API and no official MCP server. This repo gives you both:
 
 - **MCP server** for Claude Code, Claude Desktop, Cursor, Codex and any MCP client, over stdio or HTTP. [Setup](#mcp-server)
 - **REST API** on `http://127.0.0.1:8787/api/v1/skool`, with OpenAPI docs at `/docs`. [Setup](#rest-api)
-- **Python**: `call("list_members", group="yourgroup")`, plus 16 ready scripts in [`examples/`](https://github.com/cotletdev/skool-api-mcp-server/blob/main/examples/).
+- **Python**: `call("list_members", group="yourgroup")`, plus 16 ready scripts in [`examples/`](https://github.com/cotlet-connect/skool-mcp/blob/main/examples/).
 
 Free for your own use, your own business included ([license](#license)).
 
 [![Skool MCP server](https://img.shields.io/badge/Skool%20MCP-71%20tools-6d4aef)](#all-71-tools)
 [![Python 3.11+](https://img.shields.io/badge/python-3.11%2B-141318)](#requirements)
-[![License: Elastic 2.0](https://img.shields.io/badge/license-Elastic%202.0-141318)](https://github.com/cotletdev/skool-api-mcp-server/blob/main/LICENSE)
-[![MCP Badge](https://lobehub.com/badge/mcp/cotletdev-skool-api-mcp-server)](https://lobehub.com/mcp/cotletdev-skool-api-mcp-server)
+[![License: Elastic 2.0](https://img.shields.io/badge/license-Elastic%202.0-141318)](https://github.com/cotlet-connect/skool-mcp/blob/main/LICENSE)
+[![MCP Badge](https://lobehub.com/badge/mcp/cotlet-connect-skool-mcp)](https://lobehub.com/mcp/cotlet-connect-skool-mcp)
 
 Also on Odel: https://odel.app/modules/cotlet/skool and mcpbeat: https://mcpbeat.com/mcp-servers/cotlet/skool/
 
@@ -147,7 +147,7 @@ MCP clients can also run it with no install: `uvx skool-api-mcp mcp`.
 From source:
 
 ```bash
-git clone https://github.com/cotletdev/skool-api-mcp-server.git
+git clone https://github.com/cotlet-connect/skool-mcp.git
 cd skool-api-mcp-server
 python3 -m venv .venv
 . .venv/bin/activate              # Windows: .venv\Scripts\activate
@@ -157,7 +157,7 @@ skool-mcp --version
 
 With [uv](https://docs.astral.sh/uv/): `uv venv && uv pip install -e .`, then `uv run skool-mcp ...`.
 
-Setting it up with an AI agent (Claude Code, Codex, Cursor)? Open it in this folder and ask it to set up the repo: [`AGENTS.md`](https://github.com/cotletdev/skool-api-mcp-server/blob/main/AGENTS.md) tells it every step, and it asks you only for the steps in Chrome.
+Setting it up with an AI agent (Claude Code, Codex, Cursor)? Open it in this folder and ask it to set up the repo: [`AGENTS.md`](https://github.com/cotlet-connect/skool-mcp/blob/main/AGENTS.md) tells it every step, and it asks you only for the steps in Chrome.
 
 To update: `uv tool upgrade skool-api-mcp` (or `pip install -U skool-api-mcp`), from source `git pull && pip install -e .`. We copy every change of the hosted Skool tools into this repo.
 
@@ -248,7 +248,7 @@ claude mcp add skool -- uvx skool-api-mcp mcp --read-only
 
 ### Cursor
 
-`~/.cursor/mcp.json`, the same block as Claude Desktop. A ready copy is in [`mcp.json`](https://github.com/cotletdev/skool-api-mcp-server/blob/main/mcp.json).
+`~/.cursor/mcp.json`, the same block as Claude Desktop. A ready copy is in [`mcp.json`](https://github.com/cotlet-connect/skool-mcp/blob/main/mcp.json).
 
 ### Codex
 
@@ -327,26 +327,26 @@ call("create_post", group="yourgroup", category="Announcements", title="Week 12"
 
 Or one tool from the shell: `skool-mcp call list_posts group=yourgroup limit=10`, or with a JSON object.
 
-Ready scripts in [`examples/`](https://github.com/cotletdev/skool-api-mcp-server/blob/main/examples/). Each prints JSON, takes `--out file.csv` or `--out file.json` where it makes sense, and `--help`:
+Ready scripts in [`examples/`](https://github.com/cotlet-connect/skool-mcp/blob/main/examples/). Each prints JSON, takes `--out file.csv` or `--out file.json` where it makes sense, and `--help`:
 
 | Script | What it does |
 |---|---|
-| [`list_groups.py`](https://github.com/cotletdev/skool-api-mcp-server/blob/main/examples/list_groups.py) | Your groups, with your role, member count and price. |
-| [`export_members.py`](https://github.com/cotletdev/skool-api-mcp-server/blob/main/examples/export_members.py) | Members to CSV or JSON: name, role, level, points, join date, profile URL. `--role`, `--since`. |
-| [`list_membership_requests.py`](https://github.com/cotletdev/skool-api-mcp-server/blob/main/examples/list_membership_requests.py) | Pending requests with each applicant's answers. |
-| [`approve_membership_requests.py`](https://github.com/cotletdev/skool-api-mcp-server/blob/main/examples/approve_membership_requests.py) | Approves all pending requests, or those whose answers match `--match` keywords. `--dry-run` first. |
-| [`decline_membership_request.py`](https://github.com/cotletdev/skool-api-mcp-server/blob/main/examples/decline_membership_request.py) | Declines one request. |
-| [`welcome_new_members.py`](https://github.com/cotletdev/skool-api-mcp-server/blob/main/examples/welcome_new_members.py) | A welcome DM with your Start Here course link to everyone who joined in the last N days. |
-| [`export_posts.py`](https://github.com/cotletdev/skool-api-mcp-server/blob/main/examples/export_posts.py) | Feed posts: title, author, category, likes, comments, date. `--category`, `--since`. |
-| [`get_post.py`](https://github.com/cotletdev/skool-api-mcp-server/blob/main/examples/get_post.py) | One post with its body and the whole comment tree. |
-| [`unanswered_posts.py`](https://github.com/cotletdev/skool-api-mcp-server/blob/main/examples/unanswered_posts.py) | Posts from the last N days with no comments yet. |
-| [`create_post.py`](https://github.com/cotletdev/skool-api-mcp-server/blob/main/examples/create_post.py) | Publishes a post from `--body` or a Markdown file, `--pin` pins it. |
-| [`comment_on_post.py`](https://github.com/cotletdev/skool-api-mcp-server/blob/main/examples/comment_on_post.py) | Comments on a post or replies under a comment. |
-| [`pin_post.py`](https://github.com/cotletdev/skool-api-mcp-server/blob/main/examples/pin_post.py) | Pins or unpins a post on the feed or a Classroom page. |
-| [`list_courses.py`](https://github.com/cotletdev/skool-api-mcp-server/blob/main/examples/list_courses.py) | Classroom courses with modules, unlock rule and URLs. |
-| [`unread_messages.py`](https://github.com/cotletdev/skool-api-mcp-server/blob/main/examples/unread_messages.py) | Unread Skool Chat conversations with the full thread. |
-| [`send_message.py`](https://github.com/cotletdev/skool-api-mcp-server/blob/main/examples/send_message.py) | A DM to one member. |
-| [`group_stats.py`](https://github.com/cotletdev/skool-api-mcp-server/blob/main/examples/group_stats.py) | Total members, new joins, churn and MRR for 7, 30 or 90 days. |
+| [`list_groups.py`](https://github.com/cotlet-connect/skool-mcp/blob/main/examples/list_groups.py) | Your groups, with your role, member count and price. |
+| [`export_members.py`](https://github.com/cotlet-connect/skool-mcp/blob/main/examples/export_members.py) | Members to CSV or JSON: name, role, level, points, join date, profile URL. `--role`, `--since`. |
+| [`list_membership_requests.py`](https://github.com/cotlet-connect/skool-mcp/blob/main/examples/list_membership_requests.py) | Pending requests with each applicant's answers. |
+| [`approve_membership_requests.py`](https://github.com/cotlet-connect/skool-mcp/blob/main/examples/approve_membership_requests.py) | Approves all pending requests, or those whose answers match `--match` keywords. `--dry-run` first. |
+| [`decline_membership_request.py`](https://github.com/cotlet-connect/skool-mcp/blob/main/examples/decline_membership_request.py) | Declines one request. |
+| [`welcome_new_members.py`](https://github.com/cotlet-connect/skool-mcp/blob/main/examples/welcome_new_members.py) | A welcome DM with your Start Here course link to everyone who joined in the last N days. |
+| [`export_posts.py`](https://github.com/cotlet-connect/skool-mcp/blob/main/examples/export_posts.py) | Feed posts: title, author, category, likes, comments, date. `--category`, `--since`. |
+| [`get_post.py`](https://github.com/cotlet-connect/skool-mcp/blob/main/examples/get_post.py) | One post with its body and the whole comment tree. |
+| [`unanswered_posts.py`](https://github.com/cotlet-connect/skool-mcp/blob/main/examples/unanswered_posts.py) | Posts from the last N days with no comments yet. |
+| [`create_post.py`](https://github.com/cotlet-connect/skool-mcp/blob/main/examples/create_post.py) | Publishes a post from `--body` or a Markdown file, `--pin` pins it. |
+| [`comment_on_post.py`](https://github.com/cotlet-connect/skool-mcp/blob/main/examples/comment_on_post.py) | Comments on a post or replies under a comment. |
+| [`pin_post.py`](https://github.com/cotlet-connect/skool-mcp/blob/main/examples/pin_post.py) | Pins or unpins a post on the feed or a Classroom page. |
+| [`list_courses.py`](https://github.com/cotlet-connect/skool-mcp/blob/main/examples/list_courses.py) | Classroom courses with modules, unlock rule and URLs. |
+| [`unread_messages.py`](https://github.com/cotlet-connect/skool-mcp/blob/main/examples/unread_messages.py) | Unread Skool Chat conversations with the full thread. |
+| [`send_message.py`](https://github.com/cotlet-connect/skool-mcp/blob/main/examples/send_message.py) | A DM to one member. |
+| [`group_stats.py`](https://github.com/cotlet-connect/skool-mcp/blob/main/examples/group_stats.py) | Total members, new joins, churn and MRR for 7, 30 or 90 days. |
 
 ```bash
 python examples/export_members.py --group yourgroup --out members.csv
@@ -516,7 +516,7 @@ The REST API answers `{"error": "<code>", "message": "..."}`. The MCP server ret
 | 409 | `captcha_required` | Skool asks for a CAPTCHA. Solve it in Chrome. |
 | 422 | `invalid_input` | An argument is missing or wrong; the message names it. |
 | 429 | `rate_limited` | Skool is limiting the account. Wait a few minutes. |
-| 502 | `target_error` | Skool answered with an error, or changed its site. `git pull` for the latest tools, or [open an issue](https://github.com/cotletdev/skool-api-mcp-server/issues). |
+| 502 | `target_error` | Skool answered with an error, or changed its site. `git pull` for the latest tools, or [open an issue](https://github.com/cotlet-connect/skool-mcp/issues). |
 
 ## Self-hosted or hosted
 
@@ -569,11 +569,11 @@ At work and in your own business, yes, free. You may not offer it to others as a
 The source is public under the Elastic License 2.0: free to use and change, also in your own business, but not to resell as a hosted service.
 
 **A tool broke or I need another one.**
-[Open an issue](https://github.com/cotletdev/skool-api-mcp-server/issues) with the tool name and the error message.
+[Open an issue](https://github.com/cotlet-connect/skool-mcp/issues) with the tool name and the error message.
 
 ## License
 
-[Elastic License 2.0](https://github.com/cotletdev/skool-api-mcp-server/blob/main/LICENSE). In short:
+[Elastic License 2.0](https://github.com/cotlet-connect/skool-mcp/blob/main/LICENSE). In short:
 
 - **Allowed:** using it for yourself and in your own business, free. Changing the code and sharing it under the same license.
 - **Not allowed:** offering it to others as a hosted or managed service, removing the license notices, getting around its limits.
@@ -586,7 +586,7 @@ Versions up to 1.x of this repo (the scripts for the hosted API) stay MIT.
   <a href="https://cotlet.dev">
     <picture>
       <source media="(prefers-color-scheme: dark)" srcset="assets/logo-white.svg">
-      <img src="https://raw.githubusercontent.com/cotletdev/skool-api-mcp-server/main/assets/logo.svg" alt="Cotlet" width="120">
+      <img src="https://raw.githubusercontent.com/cotlet-connect/skool-mcp/main/assets/logo.svg" alt="Cotlet" width="120">
     </picture>
   </a>
 </p>

@@ -62,7 +62,7 @@ Errors come as `<code>: <message>`. `auth_expired` means Skool signed the sessio
 
 | Path | What | Edit? |
 |---|---|---|
-| `skool_api_mcp/skool/` | the Skool tools, one file per tool in `tools/`, shared request code in `client.py` | Yes for a local fix, but the next `git pull` brings our version of these files. Report the bug at https://github.com/cotletdev/skool-api-mcp-server/issues |
+| `skool_api_mcp/skool/` | the Skool tools, one file per tool in `tools/`, shared request code in `client.py` | Yes for a local fix, but the next `git pull` brings our version of these files. Report the bug at https://github.com/cotlet-connect/skool-mcp/issues |
 | `skool_api_mcp/app.py` | app name, domains, session cookie, REST prefix | Rarely |
 | `skool_api_mcp/core/` | `@tool` declaration, errors, the HTTP client with the session (`context.py`) | Yes |
 | `skool_api_mcp/session.py` | reading cookies from Chrome over CDP, the session file | Yes |
